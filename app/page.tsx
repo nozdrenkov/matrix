@@ -25,6 +25,7 @@ const getKeysFromObjects = <T extends object>(items: T[]): string[] => {
 };
 
 const entityKeys = entities.map((entity: any) =>
+  // @ts-ignore
   getKeysFromObjects(entity.data)
 );
 
@@ -109,6 +110,7 @@ function generateTableRows(
   const displayRows: string[][] = data.map((row) =>
     row
       .map((entityItem, entityIndex) => {
+        // @ts-ignore
         const keys = getKeysFromObjects(entities[entityIndex].data);
         // For each key, if the item exists, return its value (as a string); otherwise, return an empty string.
         return keys.map((key) =>
@@ -120,6 +122,7 @@ function generateTableRows(
 
   // Build a flat array of entity indices for each column.
   const flatEntityIndices: number[] = entities.flatMap((entity, index) =>
+    // @ts-ignore
     getKeysFromObjects(entity.data).map(() => index)
   );
 
@@ -173,6 +176,7 @@ export default function Home() {
           <TableHeader>
             <TableRow>
               {entities.map((entity, index) => {
+                // @ts-ignore
                 const colSpan = getKeysFromObjects(entity.data).length;
                 return (
                   <TableHead
@@ -189,6 +193,7 @@ export default function Home() {
             </TableRow>
             <TableRow>
               {entities.flatMap((entity, index) =>
+                // @ts-ignore
                 getKeysFromObjects(entity.data).map((columnName) => (
                   <TableHead
                     key={`e${index}-${columnName}`}
